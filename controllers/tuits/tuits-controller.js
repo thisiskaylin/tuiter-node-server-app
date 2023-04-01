@@ -13,7 +13,7 @@ const createTuit = async (req, res) => {
     newTuit.title = "SpaceX's Mission";
     newTuit.time = "Just now";
     newTuit.image = "nasa.png"
-    const insertedTuit = await tuitsDao.findTuits()
+    const insertedTuit = await tuitsDao.createTuit(newTuit)
     res.json(insertedTuit);
 }
 
@@ -28,14 +28,14 @@ const updateTuit = async (req, res) => {
     const status = await tuitsDao
                        .updateTuit(tuitdIdToUpdate,
                                    updates);
-    res.sendStatus(status);
+    res.json(status);
 }
 
 const deleteTuit = async (req, res) => {
     const tuitdIdToDelete = req.params.tid;
     const status = await tuitsDao
                        .deleteTuit(tuitdIdToDelete);
-    res.sendStatus(status);
+    res.json(status);
 }
 
 export default (app) => {
